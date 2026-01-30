@@ -397,26 +397,43 @@ document.getElementById("irrigationForm").addEventListener("submit", async (e) =
 /* =========================
    ✅ Refresh
 ========================= */
+
 document.getElementById("btnRefresh").addEventListener("click", async () => {
   await pingBackend();
-  const city = document.getElementById("yieldCity").value.trim() || "Delhi";
-  await loadWeather(city);
-  toast("Dashboard refreshed ✅");
-});
 
-document.getElementById("btnWeatherRefresh").addEventListener("click", async () => {
   const city =
     document.getElementById("yieldCity").value.trim() ||
     document.getElementById("irrCity").value.trim();
 
   if (!city) {
-    toast("Please enter a city first ❌");
+    toast("Enter a city before refreshing ❌");
     return;
   }
 
   await loadWeather(city);
-  toast("Weather updated ✅");
+  toast("Dashboard refreshed ✅");
 });
+
+// document.getElementById("btnRefresh").addEventListener("click", async () => {
+//   await pingBackend();
+//   const city = document.getElementById("yieldCity").value.trim() || "Delhi";
+//   await loadWeather(city);
+//   toast("Dashboard refreshed ✅");
+// });
+
+// document.getElementById("btnWeatherRefresh").addEventListener("click", async () => {
+//   const city =
+//     document.getElementById("yieldCity").value.trim() ||
+//     document.getElementById("irrCity").value.trim();
+
+//   if (!city) {
+//     toast("Please enter a city first ❌");
+//     return;
+//   }
+
+//   await loadWeather(city);
+//   toast("Weather updated ✅");
+// });
 
 function formatCropLabel(crop) {
   return crop.replaceAll("_", " ").toUpperCase();
