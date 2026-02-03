@@ -253,13 +253,19 @@ input:focus, select:focus{
 .btn{
   height: 42px;
   border-radius: 14px;
-  padding: 0 14px;
+  padding: 0 18px;
   border: 0;
-  cursor:pointer;
+  cursor: pointer;
   font-weight: 800;
   font-size: 13px;
-  letter-spacing: 0.3px;
-  transition: transform 0.08s ease, opacity 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+a.btn{
+  text-decoration: none;
 }
 
 .btn:active{ transform: scale(0.99); }
@@ -518,4 +524,54 @@ pre{
   background: rgba(27,154,170,0.10);
   color: var(--teal-dark);
   border: 1px solid rgba(27,154,170,0.18);
+}
+
+/* ===== Header with two logos ===== */
+
+.topbar-logos{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-logo{
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-center{
+  text-align: center;
+}
+
+.brand-center h1{
+  margin: 0;
+  font-size: 20px;
+  color: var(--navy-core);
+}
+
+.brand-center p{
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.header-right{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px){
+  .topbar-logos{
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .header-right{
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }

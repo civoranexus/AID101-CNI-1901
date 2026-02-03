@@ -16,7 +16,7 @@ const CROPS_100 = [
   "custard_apple","fig","date_palm","jamun","kiwi","strawberry","dragon_fruit"
 ];
 
-// ✅ Toast
+// Toast
 const toast = (msg) => {
   const el = document.getElementById("toast");
   el.textContent = msg;
@@ -24,7 +24,7 @@ const toast = (msg) => {
   setTimeout(() => el.classList.remove("show"), 2400);
 };
 
-// ✅ API status dot
+// API status dot
 const setApiStatus = (ok) => {
   const dot = document.getElementById("apiDot");
   const text = document.getElementById("apiStatus");
@@ -53,9 +53,7 @@ function pretty(obj) {
   return JSON.stringify(obj, null, 2);
 }
 
-/* =========================
-   ✅ Crop Dropdown + Search
-========================= */
+//Crop Dropdown + Search
 function fillCropDropdown(selectEl, crops, defaultCrop = "wheat") {
   selectEl.innerHTML = "";
   crops.forEach(crop => {
@@ -224,43 +222,44 @@ function setupCropAutoSuggest(searchInputId, suggestionsId, selectId, defaultCro
 }
 }
 
-/* =========================
-   ✅ Weather Widget
-========================= */
+// Weather Widget
+
 async function loadWeather(city) {
   const wCityLabel = document.getElementById("weatherCityLabel");
   const wTemp = document.getElementById("wTemp");
   const wHum = document.getElementById("wHum");
   const wCond = document.getElementById("wCond");
 
-  wCityLabel.textContent = `City: ${city || "--"}`;
   wTemp.textContent = "--";
   wHum.textContent = "--";
   wCond.textContent = "--";
 
-  if (!city) return;
+  if (!city) {
+    wCityLabel.textContent = "City: --";
+    return; 
+  }
+
+  wCityLabel.textContent = `City: ${city}`;
 
   try {
     const res = await fetch(`${API_BASE}/weather?city=${encodeURIComponent(city)}`);
     const data = await res.json();
 
     if (!res.ok || data.error) {
-      toast("Weather fetch failed ❌");
-      wCond.textContent = "Weather API error";
+      toast("Weather data not available ❌");
+      wCond.textContent = "Invalid city";
       return;
     }
 
-    wTemp.textContent = data.temperature ?? "--";
-    wHum.textContent = data.humidity ?? "--";
-    wCond.textContent = data.condition ?? "--";
+    wTemp.textContent = data.temperature;
+    wHum.textContent = data.humidity;
+    wCond.textContent = data.condition;
   } catch (err) {
-    toast("Backend offline ❌ (cannot load weather)");
+    toast("Backend not reachable ❌");
   }
 }
 
-/* =========================
-   ✅ Charts
-========================= */
+//Charts
 let yieldChart, irrChart;
 const yieldHistory = [];
 const irrHistory = [];
@@ -320,9 +319,7 @@ function pushIrr(value) {
   irrChart.update();
 }
 
-/* =========================
-   ✅ Yield Prediction
-========================= */
+// Yield Prediction
 document.getElementById("yieldForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -358,9 +355,7 @@ document.getElementById("yieldForm").addEventListener("submit", async (e) => {
   }
 });
 
-/* =========================
-   ✅ Irrigation Prediction
-========================= */
+//Irrigation Prediction
 document.getElementById("irrigationForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -394,9 +389,23 @@ document.getElementById("irrigationForm").addEventListener("submit", async (e) =
   }
 });
 
-/* =========================
-   ✅ Refresh
-========================= */
+// Refresh
+
+// document.getElementById("btnRefresh").addEventListener("click", async () => {
+//   await pingBackend();
+
+//   const city =
+//     document.getElementById("yieldCity").value.trim() ||
+//     document.getElementById("irrCity").value.trim();
+
+//   if (!city) {
+//     toast("Enter a city before refreshing ❌");
+//     return;
+//   }
+
+//   await loadWeather(city);
+//   toast("Dashboard refreshed ✅");
+// });
 
 document.getElementById("btnRefresh").addEventListener("click", async () => {
   await pingBackend();
@@ -406,34 +415,13 @@ document.getElementById("btnRefresh").addEventListener("click", async () => {
     document.getElementById("irrCity").value.trim();
 
   if (!city) {
-    toast("Enter a city before refreshing ❌");
+    toast("Enter city to refresh weather ❌");
     return;
   }
 
   await loadWeather(city);
   toast("Dashboard refreshed ✅");
 });
-
-// document.getElementById("btnRefresh").addEventListener("click", async () => {
-//   await pingBackend();
-//   const city = document.getElementById("yieldCity").value.trim() || "Delhi";
-//   await loadWeather(city);
-//   toast("Dashboard refreshed ✅");
-// });
-
-// document.getElementById("btnWeatherRefresh").addEventListener("click", async () => {
-//   const city =
-//     document.getElementById("yieldCity").value.trim() ||
-//     document.getElementById("irrCity").value.trim();
-
-//   if (!city) {
-//     toast("Please enter a city first ❌");
-//     return;
-//   }
-
-//   await loadWeather(city);
-//   toast("Weather updated ✅");
-// });
 
 function formatCropLabel(crop) {
   return crop.replaceAll("_", " ").toUpperCase();
@@ -581,13 +569,9 @@ function setupCropAutoSuggest(searchInputId, suggestionsId, selectId, defaultCro
   });
 }
 
-/* =========================
-   ✅ Init
-========================= */
-
 initCharts();
 pingBackend();
-loadWeather("");
+// loadWeather("");
 
 setupCropAutoSuggest("yieldCropSearch", "yieldSuggestions", "yieldCrop", "wheat");
 setupCropAutoSuggest("irrCropSearch", "irrSuggestions", "irrCrop", "rice");
