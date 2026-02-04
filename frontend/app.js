@@ -390,23 +390,6 @@ document.getElementById("irrigationForm").addEventListener("submit", async (e) =
 });
 
 // Refresh
-
-// document.getElementById("btnRefresh").addEventListener("click", async () => {
-//   await pingBackend();
-
-//   const city =
-//     document.getElementById("yieldCity").value.trim() ||
-//     document.getElementById("irrCity").value.trim();
-
-//   if (!city) {
-//     toast("Enter a city before refreshing ❌");
-//     return;
-//   }
-
-//   await loadWeather(city);
-//   toast("Dashboard refreshed ✅");
-// });
-
 document.getElementById("btnRefresh").addEventListener("click", async () => {
   await pingBackend();
 

@@ -175,7 +175,7 @@ def predict_yield(
 
     crop_code = CROP_MAPPING[crop]
 
-    # 1️⃣ Fetch live weather
+    # Fetch live weather
     params = {
         "q": city,
         "appid": WEATHER_API_KEY,
@@ -188,7 +188,7 @@ def predict_yield(
 
     temperature = weather["main"]["temp"]
 
-    # 2️⃣ ML prediction
+    # ML prediction
     df = pd.DataFrame(
     [[rainfall, temperature, fertilizer, crop_code]],
     columns=["rainfall", "temperature", "fertilizer", "crop"])

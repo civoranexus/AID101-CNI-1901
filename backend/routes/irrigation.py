@@ -52,7 +52,7 @@ def predict_irrigation(
     if crop not in CROP_WATER_FACTOR:
         return {"error": "Invalid crop name"}
 
-    # 1️⃣ Fetch live weather
+    # Fetch live weather
     params = {
         "q": city,
         "appid": WEATHER_API_KEY,
@@ -67,13 +67,13 @@ def predict_irrigation(
     humidity = weather["main"]["humidity"]
     condition = weather["weather"][0]["description"]
 
-    # 2️⃣ ML prediction
+    # ML prediction
     df = pd.DataFrame([[soil_moisture, temperature]],
                       columns=["soil_moisture", "temperature"])
     water = model.predict(df)[0]
     water *= CROP_WATER_FACTOR.get(crop, 1.0)
 
-    # 3️⃣ Rule-based adjustments
+    # Rule-based adjustments
     reasons = []
 
     if "rain" in condition.lower():

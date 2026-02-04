@@ -369,7 +369,6 @@ pre{
   .grid{ grid-template-columns: 1fr; }
 }
 
-/* ✅ Small button */
 .btn.small{
   height: 34px;
   border-radius: 12px;
@@ -377,7 +376,6 @@ pre{
   padding: 0 12px;
 }
 
-/* ✅ Crop Search UI */
 .search-wrap{
   margin-top: 10px;
   margin-bottom: 12px;
@@ -399,7 +397,6 @@ pre{
   width: 100%;
 }
 
-/* ✅ Weather Widget */
 .weather-card{
   margin-top: 16px;
   background: var(--bg);
@@ -462,7 +459,6 @@ pre{
   font-size: 12px;
 }
 
-/* ✅ Auto-suggestions dropdown */
 .suggestion-box{
   position: relative;
 }
@@ -472,13 +468,13 @@ pre{
   top: 48px;
   left: 0;
   right: 0;
-  background: #FFFFFF;   /* ✅ force white surface */
+  background: #FFFFFF;  
   border-radius: 16px;
   border: 1px solid rgba(20,44,82,0.14);
   box-shadow: 0 12px 26px rgba(7, 20, 38, 0.08);
   overflow: hidden;
   max-height: 260px;
-  z-index: 9999;         /* ✅ keep above everything */
+  z-index: 9999;     
 }
 
 .suggestions.hidden{
@@ -526,7 +522,40 @@ pre{
   border: 1px solid rgba(27,154,170,0.18);
 }
 
-/* ===== Header with two logos ===== */
+.topbar-logos{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-logo{
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-center{
+  text-align: center;
+}
+
+.brand-center h1{
+  margin: 0;
+  font-size: 20px;
+  color: var(--navy-core);
+}
+
+.brand-center p{
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.header-right{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
 
 .topbar-logos{
   display: grid;
@@ -563,7 +592,6 @@ pre{
   gap: 14px;
 }
 
-/* Mobile responsiveness */
 @media (max-width: 768px){
   .topbar-logos{
     grid-template-columns: 1fr;
