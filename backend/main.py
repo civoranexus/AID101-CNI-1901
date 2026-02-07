@@ -12,6 +12,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# made with love by nitin agrawal
+
 @app.get("/")
 def home():
     return {"message": "AgriAssist AI Backend Running ✅"}

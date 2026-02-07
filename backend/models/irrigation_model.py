@@ -16,6 +16,4 @@ model.fit(X, y)
 
 joblib.dump(model, MODEL_PATH)
 
-print("✅ Irrigation model trained successfully")
-print(f"📄 Model saved as: {MODEL_PATH}")
-print(f"✅ Rows used: {len(data)}")
+print("Irrigation model trained successfully")

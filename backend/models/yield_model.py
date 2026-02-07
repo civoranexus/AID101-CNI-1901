@@ -11,4 +11,5 @@ model = RandomForestRegressor(n_estimators=100, random_state=42)
 model.fit(X, y)
 
 joblib.dump(model, "yield_model.pkl")
+
 print("Yield model retrained successfully")
